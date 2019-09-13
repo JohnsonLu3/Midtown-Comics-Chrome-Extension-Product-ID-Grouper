@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|Roboto&display=swap" rel="stylesheet">
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="popup.js"></script>
+    <style>
+        html {
+            width: 325px;
+        }
+        
+        #container {
+            padding: 5px;
+        }
+        
+        h1 {
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        #help {
+            border-radius: 100%;
+            font-size: 12px;
+            border: none;
+            color: #3198ff;
+            background: none;
+            text-decoration: underline;
+        }
+        
+        button {
+            height: 30px;
+            outline: none;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        #addProductId {
+            border-radius: 5px;
+            border-style: none;
+            background-color: #25a825;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            padding: 5px;
+        }
+        
+        #addProductId:hover {
+            background-color: #259125;
+        }
+        
+        input {
+            border-radius: 8px;
+            border-style: none;
+            background-color: #e5e5e5;
+            padding: 4px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        #copy,
+        #clear {
+            border-style: none;
+            margin: 4px;
+            font-weight: 600;
+            border-radius: 5px;
+        }
+        
+        #copy:hover,
+        #clear:hover {
+            background-color: #c7c7c7;
+        }
+        
+        ul {
+            list-style: none;
+            max-height: 100px;
+            overflow: auto;
+            padding: 0;
+        }
+        
+        ul li{
+            padding: 2px 0;
+        }
+        
+        ul p {
+            margin: 2px 0;
+            display: inline;
+        }
+        
+        ul button {
+            border: none;
+            display: inline;
+            background: #b70000;
+            color: white;
+            font-weight: 600;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        
+        ul button:hover {
+            font-weight: 800;
+        }
+        
+        #list li div {
+            display: inline;
+        }
+        
+        #instructions {
+            padding: 5px;
+            background-color: #efefef;
+        }
+        
+        #instructions h2 {
+            color: dimgrey;
+            font-size: 12px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        #instructions p {
+            color: dimgrey;
+            font-size: 12px;
+            font-style: italic;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        #close {
+            color: #3198ff;
+            text-decoration: underline;
+            float: right;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Midtown Comics Product Grouper <button id="help">help</button></h1>
+        <button id="addProductId">+</button>
+        <br>
+        <input id="link" type="text" readonly/>
+        <button id="copy">Copy</button>
+        <button id="clear">Clear</button>
+        <ul id="list"> </ul>
+        <div id="instructions">
+            <button id="close">dismiss</button>
+            <h2>Instructions: </h2>
+            <p> On MidtownComics.com, go to a IPD page and press the (+)plus button to add the product id to the list. </p>
+            <p> Use clear to delete all id's from the list or use the individual delete buttons next to each product ID. </p>
+            <p> Finally once done use the Copy button to copy the link to your clipboard. </p>
+        </div>
+    </div>
+</body>
+
+</html>

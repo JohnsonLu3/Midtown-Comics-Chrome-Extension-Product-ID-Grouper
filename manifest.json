@@ -1,0 +1,29 @@
+{    
+    "name": "Midtown Comics Product ID grouper Chrome Extension",
+    "version": "1.0",
+    "description": "Groups product ID from links and adds them compiles them together into a search link",
+    "manifest_version": 2,
+     "permissions": [
+          "contextMenus"
+        ],
+    "browser_action": {
+          "default_popup": "popup.html",
+          "default_icon": {            
+          } 
+      },
+    "icons": {     
+       
+    },
+    "background" : {
+        "scripts" : [
+            "eventPage.js"
+        ],
+        "persistent" : false
+    },
+    "permissions":[
+        "storage",
+        "notifications",
+        "contextMenus",
+        "tabs"
+    ]
+}
