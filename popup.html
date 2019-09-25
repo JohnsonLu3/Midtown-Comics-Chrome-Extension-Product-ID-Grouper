@@ -8,7 +8,7 @@
     <script src="popup.js"></script>
     <style>
         html {
-            width: 325px;
+            width: 350px;
         }
         
         #container {
@@ -36,19 +36,23 @@
             font-family: 'Roboto', sans-serif;
         }
         
-        #addProductId {
+        #addPaste {
             border-radius: 5px;
             border-style: none;
             background-color: #25a825;
             color: white;
             font-size: 16px;
-            font-weight: 700;
             width: 100%;
             padding: 5px;
         }
         
-        #addProductId:hover {
+        #addPaste:hover {
             background-color: #259125;
+        }
+        
+        #pasteArea {
+            width: 98%;
+            margin-top: 4px;
         }
         
         input {
@@ -59,6 +63,7 @@
             font-family: 'Roboto', sans-serif;
         }
         
+        #addProductId,
         #copy,
         #clear {
             border-style: none;
@@ -79,7 +84,7 @@
             padding: 0;
         }
         
-        ul li{
+        ul li {
             padding: 2px 0;
         }
         
@@ -131,18 +136,83 @@
             background: none;
             border: none;
         }
+        
+        .switch-field {
+            display: flex;
+            margin-bottom: 36px;
+            overflow: hidden;
+        }
+        
+        .switch-field input {
+            position: absolute !important;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            border: 0;
+            overflow: hidden;
+        }
+        
+        .switch-field label {
+            background-color: #e4e4e4;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+            line-height: 1;
+            text-align: center;
+            padding: 8px 16px;
+            margin-right: -1px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-in-out;
+        }
+        
+        .switch-field label:hover {
+            cursor: pointer;
+        }
+        
+        .switch-field #radio-one:checked + label {
+            background-color: #5dba28;
+            box-shadow: none;
+            color: white;
+        }
+        
+        .switch-field #radio-two:checked + label {
+            background-color: #e21b1b;
+            box-shadow: none;
+            color: white;
+        }
+        
+        .switch-field label:first-of-type {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .switch-field label:last-of-type {
+            border-radius: 0 4px 4px 0;
+        }
     </style>
 </head>
 
 <body>
     <div id="container">
         <h1>Midtown Comics Product Grouper <button id="help">help</button></h1>
-        <button id="addProductId">+</button>
+        <textarea id="pasteArea"></textarea>
+        <button id="addPaste">Add Pasted IDs</button>
         <br>
         <input id="link" type="text" readonly/>
+        <button id="addProductId">+</button>
         <button id="copy">Copy</button>
         <button id="clear">Clear</button>
         <ul id="list"> </ul>
+        <div>
+<!--
+            <h3>Show Button on Page?</h3>
+            <div class="switch-field">
+                <input type="radio" id="radio-one" name="switch-one" value="yes" checked/>
+                <label id="radio-one-label" for="radio-one">Enabled</label>
+                <input type="radio" id="radio-two" name="switch-one" value="no" />
+                <label id="radio-two-label" for="radio-two"></label>
+            </div>
+-->
+        </div>
         <div id="instructions">
             <button id="close">dismiss</button>
             <h2>Instructions: </h2>

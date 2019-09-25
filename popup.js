@@ -1,5 +1,6 @@
 var productIDList = [];
-var baseUrl = "https://www.midtowncomics.com/search?prids=";
+var showAddToListButton = true;
+var baseUrl = "https://www.midtowncomics.com/search?rel=1&os=1&prids=";
 var instructions = $("#instructions");
 window.onload = function () {
     chrome.storage.sync.get("prids", function (obj) {
@@ -19,8 +20,21 @@ window.onload = function () {
             $("#instructions").remove();
         }
     });
+    chrome.storage.sync.get("showBtn", function (obj) {
+        showAddToListButton = obj["showBtn"];
+        setSwitch();
+    });
+    addButtonToPage();
 }
 $(function () {
+    $("#radio-one").change(function () {
+        showAddToListButton = true;
+        setSwitch();
+    });
+    $("#radio-two").change(function () {
+        showAddToListButton = false;
+        setSwitch();
+    });
     $("#addProductId").click(function () {
         {
             console.log("add product link pressed");
@@ -42,12 +56,30 @@ $(function () {
             });
         }
     })
+    $("#addPaste").click(function () {
+        var paste = $("#pasteArea").val();
+        paste = paste.split("\n");
+        for (var i = 0; i < paste.length; i++) {
+            var contained = false;
+            for (var ii = 0; ii < productIDList.length; ii++) {
+                if (productIDList[ii] != paste[i]) {
+                    contained = true;
+                }
+            }
+            productIDList.push(paste[i]);
+        }
+        chrome.storage.sync.set({
+            "prids": productIDList.toString()
+        })
+        populateList();
+    })
     $("#copy").click(function () {
         $("#link").select();
         document.execCommand("copy");
     })
     $("#clear").click(function () {
         $("#link").val("");
+        $("#pasteArea").val("");
         chrome.storage.sync.remove("prids");
         $("#list").empty();
         productIDList = [];
@@ -65,6 +97,38 @@ $(function () {
         location.reload();
     })
 })
+
+function setSwitch() {
+    if (showAddToListButton) {
+        $("#radio-one-label").html("Enabled");
+        $("#radio-one").attr('checked', 'checked');
+        $("#radio-two-label").html("");
+        chrome.storage.sync.set({
+            "showBtn": true
+        })
+        addButtonToPage();
+    }
+    else {
+        $("#radio-one-label").html("");
+        $("#radio-two-label").html("Disabled");
+        $("#radio-two").attr('checked', 'checked');
+        chrome.storage.sync.set({
+            "showBtn": false
+        })
+        addButtonToPage();
+    }
+    addButtonToPage();
+}
+
+function addButtonToPage() {
+    if (showAddToListButton) {
+        chrome.tabs.executeScript({
+            file: "add-button.js"
+        }, function () {
+            console.log("add-button.js injected")
+        })
+    }
+}
 
 function addPridID(url) {
     var prid = url;
